@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="比较六五至十五五的关键词、篇章顺序和措辞变化，按人群与人生领域探索有原文依据的结论和行动。">
+  <meta name="color-scheme" content="light">
+  <title>五年之间 · 普通人的规划阅读工具</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/style.css">
+  <script src="./data/site-data.js" defer></script>
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#history" aria-label="五年之间首页"><span class="brand-mark" aria-hidden="true">五</span><span>五年之间<small>普通人的规划阅读工具</small></span></a>
+      <div class="header-navigation">
+        <nav aria-label="主导航">
+          <button class="nav-button active" data-view="history" aria-current="page">变化趋势</button>
+          <button class="nav-button" data-view="actions">结论与行动</button>
+        </nav>
+        <nav class="utility-nav" aria-label="辅助资料">
+          <button class="nav-button" data-view="evidence">证据库</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="intro">
+      <div class="eyebrow">规划文本阅读 <span aria-hidden="true">/</span> 六五—十五五 <span aria-hidden="true">/</span> <span id="asof"></span></div>
+      <h1>从五年规划，看普通人的选择</h1>
+      <p class="intro-text">从关键词、篇章安排和表述，读中国五年规划。这里比较六五至十五五的公开文本，讨论其中的变化与日常生活的联系。</p>
+      <div class="intro-meta" id="corpus-stats"></div>
+    </section>
+
+    <section id="view-history" class="view" aria-labelledby="history-title">
+      <div class="section-heading"><div><p class="section-kicker">01 / 跨期文本比较</p><h2 id="history-title">变化趋势</h2></div></div>
+      <div class="history-tabs" role="tablist" aria-label="变化趋势视图"><button role="tab" aria-selected="true" class="selected" data-history="findings">主要发现</button><button role="tab" aria-selected="false" data-history="words">关键词</button><button role="tab" aria-selected="false" data-history="order">篇章顺序</button></div>
+      <div id="history-findings" class="history-panel"><div id="findings-grid" class="findings-grid"></div></div>
+      <div id="history-words" class="history-panel" hidden>
+        <div class="panel"><div class="chart-controls"><label>词语一<select id="word-one"></select></label><label>词语二<select id="word-two"></select></label><label>统计口径<select id="word-metric"><option value="normalized">每万汉字次数</option><option value="count">原始次数</option></select></label></div><div class="chart-legend" id="word-legend"></div><div class="chart-scroll" id="word-chart"></div><p class="quiet">六五、七五采用公开摘要，其余文本的篇幅和远景内容也有差异。曲线展示本版提取文本中的用词变化，比较时需结合这些差异。</p><div class="table-scroll" id="word-table"></div></div>
+        <p class="scope-note">同一个词可能用于不同话题。例如“创新”涉及科技、制度和文化，“安全”涉及粮食、生产等多个领域。点击图中数据点可查看上下文；目前提供14个重点词的逐次命中。</p>
+      </div>
+      <div id="history-order" class="history-panel" hidden>
+        <div class="panel">
+          <div class="chart-controls"><label>追踪议题<select id="order-topic"></select></label><label>图表层级<select id="order-level"></select></label></div>
+          <p id="order-description" class="order-description"></p><p id="order-summary" class="quiet" aria-live="polite"></p>
+          <div class="table-scroll"><div class="order-timeline" id="order-timeline" aria-label="各期目录匹配情况"></div></div>
+          <p class="order-mobile-hint">下方曲线图和明细表可左右滑动。上方保留全部十期的目录状态。</p>
+          <div class="chart-legend order-legend" aria-label="图例"><span class="legend-item" style="--series:#24544c">圆点：原标题位置</span><span class="legend-item" style="--series:#b27c38">折线与菱形：本期中位顺序</span></div>
+          <div class="chart-scroll" id="order-chart"></div>
+          <p class="quiet order-chart-note">圆点保留全部匹配标题的位置；折线连接相邻两期的中位顺序。同一期有多个标题时，将顺序从小到大排列，取中间值；偶数个标题取中间两值的平均。半整数是统计值，不是实际篇章编号。空缺时期保持断线；本版没有对应层级目录时单独标明。</p>
+          <p class="quiet">中位顺序描述本规则匹配标题在目录中的位置分布。各期章数、目录拆分和匹配范围不同，曲线不能直接换算为政策重要性。</p>
+          <div class="table-scroll" id="order-table"></div>
+          <p class="quiet order-scope">“首次匹配”“未再匹配”描述的是本版目录中的标题，不表示议题或政策的产生、终止。改名、合并及摘要的目录粒度都可能影响结果。篇章位置还需结合目标与条文理解，标题匹配规则随源码公开。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-actions" class="view" aria-labelledby="actions-title" hidden>
+      <div class="section-heading"><div><p class="section-kicker">02 / 与日常生活的联系</p><h2 id="actions-title">结论与行动</h2></div><button class="text-button" id="classification-help">分类说明 <span aria-hidden="true">↗</span></button></div>
+      <div class="filter-panel">
+        <div class="filter-top"><label for="person-filter">我的主要处境<select id="person-filter"></select></label><div class="view-switch" role="group" aria-label="行动展示方式"><button class="selected" id="cards-mode" aria-pressed="true">行动卡片</button><button id="matrix-mode" aria-pressed="false">二维总览</button></div></div>
+        <div><span class="filter-label" id="domain-label">我关心的生活领域</span><div id="domain-filters" class="chips" role="group" aria-labelledby="domain-label"></div></div>
+      </div>
+      <div class="results-heading"><p id="action-count" aria-live="polite"></p><button class="text-button" id="reset-actions">重置筛选</button></div>
+      <div id="matrix-panel" class="matrix-panel" hidden><p class="quiet">表中数字为各类处境、各个领域的条目数，点击可查看详情。“—”表示本版尚未整理相应条目。</p><div class="table-scroll" id="action-matrix"></div></div>
+      <div id="action-grid" class="action-grid"></div>
+      <div id="action-empty" class="empty" hidden><h3>这个组合暂时没有条目</h3><p>本领域的其他条目仍可供参考，适用条件见各条详情。</p><button class="secondary" id="show-domain-actions">查看本领域全部建议</button></div>
+      <button class="load-more" id="more-actions" hidden>再看 6 条</button>
+      <p class="scope-note"><span class="note-dot" aria-hidden="true"></span>本节由规划内容延伸到生活中的具体问题。各条注明了推断依据与适用条件，实际办理以当地现行规定为准。</p>
+    </section>
+
+    <section id="view-evidence" class="view" aria-labelledby="evidence-title" hidden>
+      <div class="section-heading"><div><p class="section-kicker">辅助资料 / 目录与检索</p><h2 id="evidence-title">证据库</h2></div></div>
+      <div class="evidence-tabs" role="tablist" aria-label="证据类型"><button class="selected" role="tab" aria-selected="true" data-evidence-mode="plans">逐期阅读</button><button role="tab" aria-selected="false" data-evidence-mode="headings">篇章目录</button><button role="tab" aria-selected="false" data-evidence-mode="contexts">关键词命中</button></div>
+      <div id="evidence-plans" class="evidence-panel"><div class="plan-picker" id="plan-picker" role="group" aria-label="选择规划"></div><div id="plan-detail" class="panel"></div></div>
+      <div id="evidence-search" class="evidence-panel" hidden>
+      <div class="panel evidence-tools"><div class="search-row"><label class="search-label"><span>检索内容</span><input id="evidence-query" type="search" placeholder="例如：就业、养老、住房"></label><label id="evidence-term-label" hidden>命中词<select id="evidence-term"></select></label><label>规划<select id="evidence-plan"></select></label></div><p class="quiet" id="evidence-description"></p></div>
+      <div class="results-heading"><p id="evidence-count" aria-live="polite"></p><button class="text-button" id="reset-evidence">清空检索</button></div>
+      <div id="evidence-results"></div><button class="load-more" id="more-evidence" hidden>继续显示</button>
+      </div>
+      <div class="download-panel"><div><h3>数据下载</h3><p class="quiet">筛选在浏览器本地完成，无需账号。数据和构建脚本随源码公开，可独立复算。</p></div><div class="download-buttons"><button class="secondary" data-download="frequencies">词频 CSV</button><button class="secondary" data-download="headings">篇章 CSV</button><button class="secondary" data-download="actions">结论与行动 JSON</button></div></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer"><span>五年之间</span><p>独立整理的规划阅读资料，非官方解读。</p><div class="footer-links"><button class="text-button" data-go="evidence">证据库</button></div></footer>
+  <dialog id="detail-dialog" aria-labelledby="detail-title"><div class="dialog-top"><span id="dialog-label"></span><button id="close-dialog" class="icon-button" aria-label="关闭详情">×</button></div><div id="detail-body"></div><div class="dialog-bottom"><button class="secondary" id="copy-detail">复制文字与出处</button><span id="copy-status" role="status"></span></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><p class="noscript">请启用 JavaScript 以使用筛选和证据详情。原始文本与数据可直接从项目 research 文件夹阅读。</p></noscript>
+</body>
+</html>
