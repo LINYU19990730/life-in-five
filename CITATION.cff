@@ -2,9 +2,11 @@ cff-version: 1.2.0
 message: "如使用本项目，请注明项目名称、研究截止日期、所用版本及修改。"
 title: "人生五年：普通人的规划阅读工具"
 type: software
-version: 1.5.0
-date-released: 2026-10-22
+version: 1.5.2
+date-released: 2026-10-23
 authors:
   - name: "人生五年贡献者"
 license: MIT
 abstract: "以可追溯的原文、关键词和篇章顺序研究六五至十五五，并按人群与生活领域提供有边界的行动建议。"
+url: "https://linyu19990730.github.io/life-in-five/"
+repository-code: "https://github.com/LINYU19990730/life-in-five"

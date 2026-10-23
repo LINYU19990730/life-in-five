@@ -1,4 +1,6 @@
-# 人生五年
+# 人生五年 · Life in Five
+
+[在线阅读](https://linyu19990730.github.io/life-in-five/) · [源码仓库](https://github.com/LINYU19990730/life-in-five)
 
 比较中国“六五”至“十五五”规划的关键词、篇章顺序与措辞，介绍相关变化及其与日常生活的联系。本站为独立整理的阅读项目，非官方发布或授权解读。
 
