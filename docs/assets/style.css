@@ -36,3 +36,71 @@
 .official-source-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:9px 18px;border:1px solid #bfd0bd;border-radius:8px;background:var(--green-soft);font-size:17px;font-weight:600;color:var(--green);text-decoration:none;white-space:nowrap}
 .official-source-button:hover{background:#dce8db;border-color:#9bb69a}.evidence-snippet .official-source-link{font-size:14px;font-weight:600;display:inline-flex;align-items:center;min-height:34px}
 @media(max-width:680px){.official-source-button{font-size:16px;min-height:46px}.plan-detail-head .official-source-button{align-self:flex-start}.evidence-tabs button{font-size:12px}}
+
+/* Findings lead with a conclusion; titles and evidence have clear reading targets. */
+.findings-intro{font-size:13px;line-height:1.8;color:var(--muted);margin:0 0 18px}
+.finding-label{display:flex;align-items:center;gap:10px;min-width:0}
+.finding-topic{font-size:13px;font-weight:600;color:var(--green)}
+.finding-card .finding-index{font-size:18px;color:#637d6e}
+.finding-card h3{font-size:20px;line-height:1.55;margin-bottom:12px}
+.finding-title{display:block;color:inherit;text-decoration:none;overflow-wrap:anywhere}
+.finding-title:hover{color:var(--green)}
+.finding-card .card-summary{font-size:14px;line-height:1.85;min-height:0;margin-bottom:20px}
+.finding-card .evidence-label{font-size:12px}
+.finding-card .card-link{min-height:44px;padding:8px 12px;border-radius:7px;background:var(--green-soft);font-size:13px;text-align:center;line-height:1.6}
+.finding-card .card-link:hover{background:#dce8db;text-decoration:none}
+html:has(#detail-dialog[open]){overflow:hidden}
+dialog{overscroll-behavior:contain}
+
+@media screen and (max-width:680px){
+  body{font-size:15px;-webkit-text-size-adjust:100%}
+  main{padding-left:16px;padding-right:16px}
+  .header-inner{padding:10px 16px 0}
+  .brand{padding-bottom:6px}
+  .header-navigation .nav-button{min-height:44px;font-size:14px;padding:5px 0 10px}
+  .header-navigation .utility-nav .nav-button{font-size:12px;min-width:44px}
+  .intro{padding:20px 0 23px;margin-bottom:24px}
+  h1{font-size:26px;line-height:1.45;letter-spacing:-.5px}
+  .intro-text{font-size:14px;line-height:1.85}
+  .eyebrow{font-size:10px}
+  .intro-meta{font-size:11px;row-gap:8px}
+  .intro-meta span{padding:0 8px}
+  .history-tabs,.evidence-tabs{flex-wrap:nowrap;gap:0}
+  .history-tabs button,.evidence-tabs button{flex:1;min-width:0;min-height:44px;padding:10px 7px;font-size:14px}
+  .findings-intro{font-size:13px;margin-bottom:15px}
+  .findings-grid{gap:16px}
+  .finding-card{padding:20px 18px 15px}
+  .finding-card .card-meta{margin-bottom:10px;gap:8px}
+  .finding-card .inference-tag{font-size:11px}
+  .finding-card h3{font-size:19px;line-height:1.55}
+  .finding-title{min-height:44px}
+  .finding-card .card-summary{font-size:15px;line-height:1.85;margin-bottom:16px}
+  .finding-card .card-bottom{gap:8px;padding-top:10px}
+  .finding-card .card-link{font-size:14px;flex-shrink:0}
+  input,select{font-size:16px;min-height:46px}
+  .chip{font-size:14px;min-height:44px;padding:9px 12px}
+  .secondary,.load-more{font-size:14px;min-height:44px}
+  .view-switch button,.plan-picker button{font-size:14px;min-height:44px}
+  .card-link,.text-button{min-height:44px}
+  .card-link{font-size:14px;padding:8px 0}
+  .action-card h3{font-size:18px}
+  :root .action-card .card-summary,.action-card .card-step{font-size:14px;line-height:1.85}
+  .card-people,.quiet,.scope-note{font-size:12px}
+  .order-description{font-size:13px}
+  .order-mobile-hint,.order-chart-note,.order-scope{font-size:12px;line-height:1.85}
+  .quote-card blockquote{font-size:15px;line-height:1.85;overflow-wrap:anywhere}
+  dialog{width:calc(100vw - 24px);max-height:calc(100dvh - 24px)}
+  .dialog-top{padding:10px 14px;gap:10px}
+  .dialog-top>span{font-size:12px}
+  .icon-button{width:44px;height:44px;flex-shrink:0}
+  #detail-body{padding:20px 18px 8px;overflow-wrap:anywhere}
+  #detail-body h2{font-size:22px;line-height:1.5}
+  #detail-body h3{font-size:16px;line-height:1.7}
+  #detail-body p,#detail-body li{font-size:16px;line-height:1.85}
+  #detail-body .condition,#detail-body .boundary{font-size:14px;line-height:1.85}
+  #detail-body .evidence-snippet h4{font-size:14px;line-height:1.7}
+  #detail-body .evidence-snippet .quiet{font-size:12px}
+  .evidence-snippet blockquote{font-size:15px;line-height:1.85}
+  .evidence-snippet .official-source-link{min-height:44px}
+  .dialog-bottom{padding:14px 18px 18px}
+}

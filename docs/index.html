@@ -39,7 +39,7 @@
     <section id="view-history" class="view" aria-labelledby="history-title">
       <div class="section-heading"><div><p class="section-kicker">01 / 跨期文本比较</p><h2 id="history-title">变化趋势</h2></div></div>
       <div class="history-tabs" role="tablist" aria-label="变化趋势视图"><button role="tab" aria-selected="true" class="selected" data-history="findings">主要发现</button><button role="tab" aria-selected="false" data-history="words">关键词</button><button role="tab" aria-selected="false" data-history="order">篇章顺序</button></div>
-      <div id="history-findings" class="history-panel"><div id="findings-grid" class="findings-grid"></div></div>
+      <div id="history-findings" class="history-panel"><p class="findings-intro">8 个主要发现，每条附原文与比较范围。</p><div id="findings-grid" class="findings-grid"></div></div>
       <div id="history-words" class="history-panel" hidden>
         <div class="panel"><div class="chart-controls"><label>词语一<select id="word-one"></select></label><label>词语二<select id="word-two"></select></label><label>统计口径<select id="word-metric"><option value="normalized">每万汉字次数</option><option value="count">原始次数</option></select></label></div><div class="chart-legend" id="word-legend"></div><div class="chart-scroll" id="word-chart"></div><p class="quiet">六五、七五采用公开摘要，其余文本的篇幅和远景内容也有差异。曲线展示本版提取文本中的用词变化，比较时需结合这些差异。</p><div class="table-scroll" id="word-table"></div></div>
         <p class="scope-note">同一个词可能用于不同话题。例如“创新”涉及科技、制度和文化，“安全”涉及粮食、生产等多个领域。点击图中数据点可查看上下文；目前提供14个重点词的逐次命中。</p>

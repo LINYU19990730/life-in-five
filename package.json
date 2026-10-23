@@ -1,6 +1,6 @@
 {
   "name": "life-in-five",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "private": true,
   "description": "A source-traceable public reader of China's sixth to fifteenth five-year plans.",
   "license": "MIT",
@@ -10,6 +10,10 @@
     "test": "python scripts/check.py",
     "test:browser": "node scripts/browser-test.mjs"
   },
-  "devDependencies": { "playwright": "1.62.1" },
-  "engines": { "node": ">=22" }
+  "devDependencies": {
+    "playwright": "1.62.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
 }

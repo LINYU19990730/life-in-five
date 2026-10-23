@@ -15,6 +15,7 @@
   let evidenceRequest = 0;
   let copyText = '';
   let detailRoute = '';
+  let closingForRoute = false;
   let lastTrigger;
 
   function locationLabel(planId, page) {
@@ -105,7 +106,7 @@
     openDialog('证据库 / 原文片段', `<h2 id="detail-title">${esc(e.plan)} · ${esc(e.heading)}</h2>${evidenceMarkup([id])}<h3>哪些结论引用了它</h3><ul>${uses.map(x=>`<li>${esc(x.title)}</li>`).join('')}</ul><p class="quiet">原文的任务主体、限定对象和时间范围需要一起阅读；引文不是对个人结果的承诺。</p>`, evidencePlain([id]), `evidence/${id}`);
   }
   function closeDialog() { $('#detail-dialog').close(); }
-  $('#detail-dialog').addEventListener('close', () => { detailRoute = ''; if (lastTrigger?.isConnected && (document.activeElement===document.body || $('#detail-dialog').contains(document.activeElement))) lastTrigger.focus(); if (state.view === 'actions') updateActionHash(); else setHash('#' + state.view); });
+  $('#detail-dialog').addEventListener('close', () => { detailRoute = ''; if (lastTrigger?.isConnected && (document.activeElement===document.body || $('#detail-dialog').contains(document.activeElement))) lastTrigger.focus(); if (closingForRoute) { closingForRoute = false; return; } if (state.view === 'actions') updateActionHash(); else setHash('#' + state.view); });
   $('#close-dialog').addEventListener('click', closeDialog);
   $('#detail-dialog').addEventListener('click', e => { if (e.target === $('#detail-dialog')) { const r = e.target.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeDialog(); } });
   $('#copy-detail').addEventListener('click', async () => {
@@ -114,7 +115,7 @@
   });
 
   function renderFindings() {
-    $('#findings-grid').innerHTML = D.findings.map((f, i) => `<article class="finding-card"><div class="card-meta"><span class="finding-index">${String(i+1).padStart(2,'0')}</span><span class="inference-tag">${esc(f.kind)}</span></div><h3>${esc(f.title)}</h3><p class="card-summary">${esc(f.summary)}</p><div class="card-bottom"><span class="evidence-label">${f.evidence.length}段原文 · 解释与边界</span><button class="card-link" data-open-finding="${f.id}">阅读分析 ↗</button></div></article>`).join('');
+    $('#findings-grid').innerHTML = D.findings.map((f, i) => `<article class="finding-card" aria-labelledby="finding-title-${f.id}"><div class="card-meta"><div class="finding-label"><span class="finding-index" aria-hidden="true">${String(i+1).padStart(2,'0')}</span><span class="finding-topic">${esc(f.topic)}</span></div><span class="inference-tag">${esc(f.kind)}</span></div><h3 id="finding-title-${f.id}"><a class="finding-title" href="#finding/${f.id}">${esc(f.title)}</a></h3><p class="card-summary">${esc(f.summary)}</p><div class="card-bottom"><span class="evidence-label">${f.evidence.length} 段原文</span><button class="card-link" data-open-finding="${f.id}" aria-label="${esc(`查看${f.title}的依据与解读`)}">依据与解读 ↗</button></div></article>`).join('');
   }
   function selectHistory(tab) {
     if(tab==='plans'){state.evidenceMode='plans';showView('evidence');return;}
@@ -285,6 +286,8 @@
   $('#more-evidence').addEventListener('click',()=>{state.evidenceLimit+=40;renderEvidence();});
   function route(){
     let hash;try{hash=decodeURIComponent(location.hash.slice(1));}catch{hash='';}
+    const routedDetail = /^(?:finding|action|order)\//.test(hash) || (hash.startsWith('evidence/') && hash!=='evidence/plans') || hash==='classification';
+    if ($('#detail-dialog').open && !routedDetail) { closingForRoute = true; $('#detail-dialog').close(); }
     if(!hash)selectHistory('findings');
     if(hash==='evidence/plans'||hash==='history/plans'){state.evidenceMode='plans';showView('evidence',{hash:false});return;}
     if(hash==='history/order'){showView('history',{hash:false});selectHistory('order');return;}
