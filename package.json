@@ -1,6 +1,6 @@
 {
-  "name": "between-five-year-plans",
-  "version": "1.5.0",
+  "name": "rensheng-wunian",
+  "version": "1.5.1",
   "private": true,
   "description": "A source-traceable public reader of China's sixth to fifteenth five-year plans.",
   "license": "MIT",

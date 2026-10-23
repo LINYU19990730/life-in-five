@@ -229,11 +229,11 @@
   function download(name,body,mime){const blob=new Blob([body],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function csvCell(v){let s=String(v??'');if(/^[=+@]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
   function downloadData(type){
-    if(type==='actions'){download('五年之间-结论与行动.json',JSON.stringify({asof:D.meta.asof,classification:{people:D.people,domains:D.domains},actions:D.actions.map(({priority,priority_reason,...action})=>action),findings:D.findings,evidence:D.evidence},null,2),'application/json;charset=utf-8');return;}
+    if(type==='actions'){download('人生五年-结论与行动.json',JSON.stringify({asof:D.meta.asof,classification:{people:D.people,domains:D.domains},actions:D.actions.map(({priority,priority_reason,...action})=>action),findings:D.findings,evidence:D.evidence},null,2),'application/json;charset=utf-8');return;}
     let rows;
     if(type==='frequencies')rows=[['规划','关键词','次数','汉字分母','每万汉字次数','版本'],...D.frequencies.map(r=>{const p=plans.get(r.plan_id);return[p.name,r.term,r.count,p.body_hanzi,r.normalized.toFixed(8),p.kind];})];
     else rows=[['规划','层级','顺序','同层级总数','标题','所属篇','定位','来源'],...D.headings.map(h=>[h.plan,h.level,h.number,h.level_total,h.title,h.parent,locationLabel(h.plan_id,h.page),h.source_url])];
-    download(`五年之间-${type==='frequencies'?'词频':'篇章'}.csv`,'\uFEFF'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');
+    download(`人生五年-${type==='frequencies'?'词频':'篇章'}.csv`,'\uFEFF'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');
   }
 
   // Render static navigation once to keep keyboard focus stable when filtering.

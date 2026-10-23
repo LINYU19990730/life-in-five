@@ -19,7 +19,7 @@ def main():
                   and p.suffix != '.pyc' and not p.name.startswith('.env')]
     output = ROOT / 'releases'
     output.mkdir(exist_ok=True)
-    archive = output / f"five-year-between-{data['meta'].get('edition_date', data['meta']['asof'])}.zip"
+    archive = output / f"rensheng-wunian-{data['meta'].get('edition_date', data['meta']['asof'])}.zip"
     # A fixed metadata timestamp makes unchanged inputs produce the same archive.
     date = tuple(map(int, data['meta'].get('edition_date', data['meta']['asof']).split('-'))) + (0, 0, 0)
     from zipfile import ZipInfo
