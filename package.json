@@ -1,0 +1,15 @@
+{
+  "name": "between-five-year-plans",
+  "version": "1.5.0",
+  "private": true,
+  "description": "A source-traceable public reader of China's sixth to fifteenth five-year plans.",
+  "license": "MIT",
+  "scripts": {
+    "build": "python scripts/build.py",
+    "dev": "python -m http.server 4173 --bind 127.0.0.1 --directory docs",
+    "test": "python scripts/check.py",
+    "test:browser": "node scripts/browser-test.mjs"
+  },
+  "devDependencies": { "playwright": "1.62.1" },
+  "engines": { "node": ">=22" }
+}

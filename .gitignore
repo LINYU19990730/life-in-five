@@ -1,0 +1,23 @@
+# Publish only the reviewed public project. Earlier private research stays local.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/PUBLICATION_REVIEW.md
+!/LICENSE
+!/DATA_LICENSE.md
+!/CONTRIBUTING.md
+!/CITATION.cff
+!/package.json
+!/docs/
+!/research/
+!/scripts/
+!/.github/
+**/__pycache__/
+**/*.pyc
+**/.DS_Store
+**/node_modules/
+**/test-results/
+**/playwright-report/
+**/.env
+**/.env.*
