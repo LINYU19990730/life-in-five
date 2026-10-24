@@ -11,16 +11,31 @@ def main():
     data=json.loads((ROOT/'docs/data/research.json').read_text(encoding='utf-8'))
     assert data['meta']['corpus_count']==10 and len(data['frequencies'])==850
     assert len(data['headings'])==567 and data['meta']['context_count']==2960
-    assert len(data['actions'])==48 and len(data['findings'])==8
-    assert [d['name'] for d in data['domains']]==['教育','就业','住房','健康','生活','养老']
-    assert [a['priority'] for a in data['actions']]==sorted(a['priority'] for a in data['actions'])
+    assert len(data['actions'])==61 and len(data['findings'])==8
+    assert all(a['title']==a['question'] and a['question'].endswith('？') and a['answer'] for a in data['actions'])
+    assert [d['name'] for d in data['domains']]==['教育','就业','住房','健康','生活','养老','投资']
+    guides=[a for a in data['actions'] if a.get('decision_guide')]
+    service=[a for a in data['actions'] if not a.get('decision_guide')]
+    assert len(guides)==21 and data['actions']==guides+service
+    assert [a['reading_order'] for a in guides]==list(range(1,22))
+    assert [a['priority'] for a in service]==sorted(a['priority'] for a in service)
+    evidence={e['id']:e for e in data['evidence']}
+    for guide in guides:
+        assert {evidence[e]['plan_id'] for e in guide['evidence']}=={14,15}
+        assert len(guide['decision'])==3 and guide['question'] and guide['answer'] and guide['output']
+        assert len(guide['worksheet']['columns'])>=6
+        assert guide['comparison']['before'] and guide['comparison']['after']
+    assert all(sum(a['domain']==d['id'] for a in guides)>=2 for d in data['domains'])
+    assert len(next(a for a in guides if a['id']=='A26')['directions'])==8
+    assert sum(a['domain']=='investment' for a in guides)==6
     assert all(a['priority'] in [1,2,3] and a['priority_reason'] for a in data['actions'])
     assert next(f['count'] for f in data['frequencies'] if f['plan_id']==15 and f['term']=='人工智能')==53
     assert all(e['checked'] and e['line']>0 and e['page']>0 for e in data['evidence'])
     assert all(a['kind']=='研究推断' and a['conditions'] and a['boundary'] and len(a['steps'])==3 for a in data['actions'])
     by_id={a['id']:a for a in data['actions']}
     assert '困难残疾人' in by_id['A24']['policy_fact'] and '重度残疾人' in by_id['A24']['policy_fact']
-    assert len(by_id['A11']['people'])==7
+    assert len(by_id['A11']['people'])==5
+    assert [p['name'] for p in data['people']]==['学生','职工/灵活就业','待业','个体户/创业','退休']
     assert 'student' in by_id['A14']['people']
     assert 'selfemployed' in by_id['A10']['people']
     for finding in data['findings']:
@@ -73,7 +88,7 @@ def main():
     assets=Assets();assets.feed((ROOT/'docs/index.html').read_text(encoding='utf-8'))
     for path in assets.paths:
         assert not path.startswith(('https:','http:','//')),'Runtime remote dependency'
-        assert (ROOT/'docs'/path).is_file(),f'Missing asset: {path}'
+        assert (ROOT/'docs'/path.split('?',1)[0].split('#',1)[0]).is_file(),f'Missing asset: {path}'
     app=(ROOT/'docs/assets/app.js').read_text(encoding='utf-8')
     assert not re.search(r'\b(?:fetch|eval|XMLHttpRequest|WebSocket)\s*\(',app)
     if (ROOT/'.git').exists():

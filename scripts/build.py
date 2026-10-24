@@ -13,15 +13,13 @@ def csvout(name,heads,rows):
         w=csv.writer(f,lineterminator='\n');w.writerow(heads);w.writerows(rows)
 
 PEOPLE=[
- {'id':'student','name':'在学与初入职场','short':'在学 / 初入职场'},
- {'id':'office','name':'办公室与专业岗位','short':'办公室 / 专业岗位'},
- {'id':'field','name':'现场与技能岗位','short':'现场 / 技能岗位'},
- {'id':'flex','name':'灵活与平台就业','short':'灵活 / 平台就业'},
- {'id':'selfemployed','name':'个体与小微经营','short':'个体 / 小微经营'},
- {'id':'transition','name':'待业、转岗与再就业','short':'待业 / 转岗'},
- {'id':'older','name':'临近退休与退休','short':'临近退休 / 退休'},
+ {'id':'student','name':'学生','short':'学生'},
+ {'id':'worker','name':'职工/灵活就业','short':'职工/灵活就业'},
+ {'id':'transition','name':'待业','short':'待业'},
+ {'id':'selfemployed','name':'个体户/创业','short':'个体户/创业'},
+ {'id':'older','name':'退休','short':'退休'},
 ]
-DOMAINS=[{'id':i,'name':n} for i,n in [('education','教育'),('employment','就业'),('housing','住房'),('health','健康'),('life','生活'),('retirement','养老')]]
+DOMAINS=[{'id':i,'name':n} for i,n in [('education','教育'),('employment','就业'),('housing','住房'),('health','健康'),('life','生活'),('retirement','养老'),('investment','投资')]]
 ACTION_PRIORITIES=[
  {'rank':1,'name':'基本保障','description':'涉及基本收入、居住、医疗和养老保障，或在适用条件下拖延可能造成较大损失。'},
  {'rank':2,'name':'日常改善','description':'有助于减少日常支出、改善工作和家庭安排，通常需要比较条件后办理。'},
@@ -56,7 +54,7 @@ def main():
     for h in heads:groups[(h['plan_id'],h['level'])].append(h)
     for key,rows in groups.items():assert [h['number'] for h in rows]==list(range(1,len(rows)+1)),key
     evidence=[];actions=[];findings=[]
-    for filename,prefix,kind in [('actions-source.json','A','actions'),('development-actions.json','D','actions'),('practical-actions.json','P','actions'),('findings-source.json','F','findings')]:
+    for filename,prefix,kind in [('actions-source.json','A','actions'),('development-actions.json','D','actions'),('practical-actions.json','P','actions'),('recent-actions.json','R','actions'),('findings-source.json','F','findings')]:
         content=read(ROOT/'scripts'/filename);ids={x['id']:prefix+'-'+x['id'] for x in content['evidence']}
         for e in content['evidence']:
             level=e.get('heading_level','章');pid=e['plan_id']
@@ -78,17 +76,23 @@ def main():
             if kind=='actions':
                 assert set(r['people'])<={p['id'] for p in PEOPLE};assert r['domain'] in {d['id'] for d in DOMAINS};assert len(r['steps'])==3
                 assert r['priority'] in [1,2,3] and r['priority_reason'],r['id']
+                if r.get('decision_guide'):
+                    assert all(r.get(k) for k in ['question','answer','comparison','decision','output','reading_order']),r['id']
+                    assert {next(e['plan_id'] for e in evidence if e['id']==eid) for eid in r['evidence']}=={14,15},r['id']
+                    for direction in r.get('directions',[]):
+                        direction['evidence']=[ids[x] for x in direction['evidence']]
+                        assert set(direction['evidence'])<=set(r['evidence']),r['id']
                 r['kind']='研究推断';actions.append(r)
             else:
                 for m in r.get('metrics',[]):assert next(f['count'] for f in freq if f['plan_id']==m['plan_id'] and f['term']==m['term'])==m['count'],r['id']
                 findings.append(r)
     assert len({r['id'] for r in actions})==len(actions)
-    actions.sort(key=lambda a:(a['priority'],int(a['id'][1:])))
+    actions.sort(key=lambda a:(0,a['reading_order']) if a.get('decision_guide') else (1,a['priority'],int(a['id'][1:])))
     assert len({r['id'] for r in evidence})==len(evidence)
     assert all(any(p['id'] in a['people'] for a in actions) for p in PEOPLE)
     assert all(any(a['domain']==d['id'] for a in actions) for d in DOMAINS)
     public_sources=[{k:s[k] for k in ['id','name','years','kind','url','retrieved','sha256','body_hanzi','text_note']} for s in sources]
-    data={'meta':{'name':'人生五年','asof':'2026-10-19','corpus_count':len(sources),'term_count':len(terms),'heading_count':len(heads),'context_count':0,'quote_count':len(evidence),'schema_version':3,'edition_date':'2026-10-23','order_topic_count':len(order_topics),'action_sort':'priority ascending, then numeric action id within each tier'},'people':PEOPLE,'domains':DOMAINS,'action_priorities':ACTION_PRIORITIES,'sources':public_sources,'headings':heads,'terms':terms,'frequencies':freq,'trajectory':trajectory,'order_topics':order_topics,'order_periods':order_periods,'evidence':evidence,'actions':actions,'findings':findings,'rules':RULES}
+    data={'meta':{'name':'人生五年','asof':'2026-10-19','corpus_count':len(sources),'term_count':len(terms),'heading_count':len(heads),'context_count':0,'quote_count':len(evidence),'schema_version':4,'edition_date':'2026-10-24','advice_review_date':'2026-10-23','decision_guide_count':sum(bool(a.get('decision_guide')) for a in actions),'order_topic_count':len(order_topics),'action_sort':'decision guides by reading_order, then service references by priority and numeric action id'},'people':PEOPLE,'domains':DOMAINS,'action_priorities':ACTION_PRIORITIES,'sources':public_sources,'headings':heads,'terms':terms,'frequencies':freq,'trajectory':trajectory,'order_topics':order_topics,'order_periods':order_periods,'evidence':evidence,'actions':actions,'findings':findings,'rules':RULES}
     # The separate contexts snapshot is corpus-derived and contains no user profile.
     context_terms=['人工智能','智能体','大模型','信息化','数字经济','房地产','养老','人口','人才','创新','就业','自立自强','安全','优先']
     contexts=[]

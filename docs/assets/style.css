@@ -104,3 +104,108 @@ dialog{overscroll-behavior:contain}
   .evidence-snippet .official-source-link{min-height:44px}
   .dialog-bottom{padding:14px 18px 18px}
 }
+
+/* Recent-plan decision guides: readable summaries and progressive detail. */
+.action-reading-note{margin:22px 0 8px;max-width:840px;color:var(--muted)}
+.action-reading-note p{color:var(--ink);font-size:16px;font-weight:600;margin-bottom:4px}
+.action-reading-note span,.action-domain-intro{font-size:13px;line-height:1.85;color:var(--muted)}
+.action-domain-intro{margin:0 0 20px}
+.guide-label{font-size:11px;color:var(--muted)}
+.card-question{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 8px}
+:root .decision-card .card-summary{font-size:14px;line-height:1.9;margin-bottom:16px;color:var(--ink)}
+.decision-card .card-step{background:var(--green-soft);padding:10px 12px;border-radius:7px;color:var(--green-dark);font-size:12px}
+.detail-question{font-size:15px;color:var(--muted);margin:14px 0 8px}
+.detail-answer{font-size:17px;line-height:1.95;color:var(--ink)}
+.plan-comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.plan-comparison section{min-width:0;padding:16px;background:#f0f3ed;border-radius:9px}
+.plan-comparison h4{color:var(--green);margin:0 0 9px;font-size:13px}
+.plan-comparison p{margin:0;font-size:14px}
+.industry-direction{border:1px solid var(--line);border-radius:9px;margin:10px 0;background:var(--surface)}
+.industry-direction summary,.guide-evidence summary{cursor:pointer;padding:14px 16px;color:var(--green);font-weight:600;line-height:1.8;min-height:48px}
+.industry-direction p{margin:0 16px 12px;font-size:14px;line-height:1.9}
+.industry-direction .role-examples{background:var(--green-soft);padding:12px;border-radius:6px}
+.direction-sources{display:flex;flex-wrap:wrap;gap:4px 16px;padding:0 16px 12px}
+.direction-sources button{white-space:normal;text-align:left;min-height:44px}
+.guide-output{border-left:3px solid var(--green);padding:13px 16px;background:var(--green-soft);margin-top:20px}
+.guide-evidence{padding:0!important;scroll-margin-top:65px}
+.guide-evidence>p,.guide-evidence>blockquote,.guide-evidence>a{margin-left:16px;margin-right:16px}
+.guide-evidence>blockquote{font-size:14px!important}
+.guide-evidence>a{display:inline-block;margin-bottom:16px}
+.decision-checks li{margin-bottom:12px}
+@media(max-width:680px){
+ .action-reading-note span,.action-domain-intro{font-size:13px}
+ :root .decision-card .card-summary{font-size:15px}
+ .card-question{font-size:13px}
+ .detail-answer{font-size:17px!important}
+ .plan-comparison{grid-template-columns:1fr;gap:8px}
+ .plan-comparison p,.industry-direction p,.guide-evidence>blockquote{font-size:16px!important}
+ .industry-direction summary,.guide-evidence summary{font-size:15px;padding:12px;overflow-wrap:anywhere}
+ .industry-direction p{margin-left:12px;margin-right:12px}
+ .direction-sources{padding-left:12px;padding-right:12px}
+}
+
+.guide-output p{margin:5px 0 12px}.guide-output small{display:block;margin-top:9px;font-size:12px;line-height:1.8;color:var(--muted)}.guide-output button{min-height:44px}
+
+.quote-hint{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:5px}.guide-evidence summary:focus-visible{outline-offset:-4px}
+@media(min-width:681px){#detail-body .industry-direction p,#detail-body .plan-comparison p{font-size:15px}}
+
+/* Advice index: only a question and an answer, with the whole card as a link. */
+#action-grid{align-items:start}
+a.qa-card{color:var(--ink);text-decoration:none;align-self:start;height:auto;gap:10px}
+a.qa-card h3{margin:0;color:var(--green-dark);font-size:18px;line-height:1.65}
+:root a.qa-card .card-summary{font-size:15px;line-height:1.9;color:var(--ink);margin:0;min-height:0}
+.action-results{justify-content:flex-end;margin:10px 0 18px}
+@media(max-width:680px){
+ a.qa-card{padding:20px}
+ a.qa-card h3{font-size:18px}
+ :root a.qa-card .card-summary{font-size:16px;line-height:1.85}
+ .brand small{letter-spacing:0;font-size:10px}
+}
+
+/* Phone reading: keep the tables' content in a single readable column. */
+@media screen and (max-width:1000px){
+ input,select{font-size:16px;min-height:46px}
+ .chip,.view-switch button,.plan-picker button{min-height:44px;font-size:14px}
+ .matrix-table button{min-height:48px;font-size:14px}
+ :root a.qa-card .card-summary{font-size:16px}
+ #detail-body p,#detail-body li{font-size:16px}
+ #detail-body .evidence-snippet blockquote{font-size:15px}
+ .icon-button{width:44px;height:44px;flex-shrink:0}
+}
+@media screen and (max-width:1000px){
+ html{scroll-padding-top:110px}
+ #detail-dialog{scroll-padding-top:80px}
+ .brand small{display:block;font-size:11px;margin-top:3px}
+ .brand-mark{width:36px;height:36px}
+ label,.filter-label{font-size:14px}
+ .chart-legend{flex-wrap:wrap;gap:6px 16px;font-size:12px}
+ .order-mobile-hint{display:block;font-size:12px;line-height:1.85}
+ .order-period-name{font-size:14px}
+ .order-period-level{font-size:12px}
+ .order-event{font-size:11px;white-space:normal}
+ .order-evidence-table,.evidence-table,.matrix-table{display:block;min-width:0;width:100%}
+ .order-evidence-table thead,.evidence-table thead,.matrix-table thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .order-evidence-table tbody,.evidence-table tbody,.matrix-table tbody{display:grid;gap:16px}
+ .order-evidence-table tr,.evidence-table tr,.matrix-table tr{display:grid;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+ .order-evidence-table td,.evidence-table td{display:block;min-width:0!important;white-space:normal!important;padding:12px 14px;font-size:16px;overflow-wrap:anywhere}
+ .order-evidence-table td:last-child,.evidence-table td:last-child{border-bottom:0}
+ .order-evidence-table td:first-child{background:var(--green-soft)}
+ .order-evidence-table td:nth-child(2){padding-top:8px;padding-bottom:8px}
+ .order-evidence-table td:nth-child(3):before,.order-evidence-table td:nth-child(4):before,.evidence-table td:before{display:block;margin-bottom:5px;font-size:13px;font-weight:600;color:var(--muted)}
+ .order-evidence-table td:nth-child(3):before{content:'匹配标题与位置'}
+ .order-evidence-table td:nth-child(4):before{content:'原文定位'}
+ .evidence-table td:before{content:attr(data-label)}
+ .order-position{display:block;font-size:13px}
+ .order-title-list li{margin-bottom:15px}
+ .order-location-list{font-size:14px;white-space:normal}
+ .order-location-list a,.evidence-table td a{display:inline-flex;align-items:center;min-height:44px;white-space:normal}
+ .order-location-list li{margin-bottom:0}
+ .matrix-table tr{grid-template-columns:1fr 1fr;padding:10px;gap:8px}
+ .matrix-table th:first-child{position:static;grid-column:1/-1;width:auto;padding:8px;background:none;font-size:16px;border:0}
+ .matrix-table td{display:block;padding:0;border:0;min-width:0}
+ .matrix-table button{min-height:48px;font-size:15px;display:flex;justify-content:space-between;align-items:center;padding:10px 12px;gap:8px}
+ .matrix-table button:before{content:attr(data-domain-label);font-size:14px}
+ .plan-top-list li{font-size:16px;line-height:1.85}
+ .ordinal{font-size:12px}
+ .guide-evidence{scroll-margin-top:85px}
+}
