@@ -1,0 +1,13 @@
+interface:
+  display_name: 提问增强与思考路由
+  short_description: 自动匹配十二条完整原文模板，保留结构与问法，改写问题并按原文流程执行
+  default_prompt: 请使用 $prompt-method-router 读取适合我问题的完整原文模板，按模板结构改写我的提问，然后按其步骤和交互顺序执行。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
